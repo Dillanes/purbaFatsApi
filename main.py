@@ -9,11 +9,40 @@ origins = [
     "http://localhost:8000"
 ]
 
+# app = FastAPI(
+#     description='Desarrollo de apis para la aplicacion CCG',
+#     version='0.0.1',
+#     title='API CCG',
+# )
+
+tags_metadata = [
+    dict(
+        name="persona",
+        description="Operation crud for the persons"
+    )
+]
+
 app = FastAPI(
-    description='Desarrollo de apis para la aplicacion CCG',
+    title= "API CCG",
+    description= "Desarrollo de apis para la aplicacion CCG",
     version='0.0.1',
-    title='API CCG',
-)
+    terms_of_service='http://example.com/terms/',
+    contact= dict(
+        name = "Israel Dillanes",
+        email = "israeldillanes2@gmail.com"       
+    ),
+    license_info=dict(
+        name="ORG 2.2",
+        url = "https://www.apache.org/locense/LICENSE-2.0.html"
+    ),
+    openapi_tags=tags_metadata,
+    openapi_url='/api/v1/openapi.json',
+    docs_url="/docs",
+    redoc_url="/redoct",
+
+    )
+
+
 
 app.add_middleware(
     CORSMiddleware,
