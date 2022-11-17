@@ -17,13 +17,15 @@ prueba = APIRouter(
 def upload_img(image:UploadFile = File(...)):
     format_img =  image.filename.split('.')[-1]
     path_img = os.path.dirname(__file__)+'\..\static'+f'\{uuid4()}.{format_img}'
-
     with open(path_img,'wb') as buffer:
         shutil.copyfileobj(image.file,buffer)
     return {'result':'Image guardada'}
 
-
-
+@prueba.delete('/{name}')
+def delete_img(name:str):
+    path_dir = os.path.dirname(__file__)+f'\..\static\{name}.jpg'
+    os.remove(path_dir)
+    return {'result':'Image eliminada'}
 
 @prueba.get('/{name}',status_code=200)
 def prueba_get(name:str):
